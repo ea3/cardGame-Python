@@ -98,6 +98,14 @@ while user.still_has_cards() and computer_player.still_has_cards():
             user.hand.add(table_cards)
         else:
             computer_player.hand.add(table_cards)
+    else:
+        if RANKS.index(c_card[1]) < RANKS.index(p_card[1]):
+            user.hand.add(table_cards)
+        else:
+            computer_player.hand.add(table_cards)
+
+print("Game over, number of rounds: " + str(total_rounds))
+print("A war happened " + str(war_count) + " times")
 
 
 
