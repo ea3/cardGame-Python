@@ -54,6 +54,56 @@ class Player:
         return len(self.hand.cards) != 0
 
 
+print("Welcome to war!")
+
+# Logic
+
+d = Deck()
+d.shuffle()
+half1, half2 = d.split_in_half()
+
+computer_player = Player("computer", Hand(half1))
+
+name = input("What is your name")
+user = Player(name, Hand(half2))
+
+total_rounds = 0
+war_count = 0
+
+while user.still_has_cards() and computer_player.still_has_cards():
+    total_rounds += 1
+    print("Time for a new round!")
+    print("Current standings")
+    print(user.name + "has the count: "+ str(len(user.hand.cards)))
+    print(computer_player.name + "has the count: " + str(len(computer_player.hand.cards)))
+    print("Play a card")
+    print('\n')
+
+    table_cards = []
+
+    c_card = computer_player.play_card()
+    p_card = user.play_card()
+
+    table_cards.append(c_card)
+    table_cards.append(p_card)
+
+    if c_card[1] == p_card[1]:
+        war_count += 1
+        print("War")
+
+        table_cards.extend(user.remove_war_cards())
+        table_cards.extend(computer_player.remove_war_cards())
+
+        if RANKS.index(c_card[1]) < RANKS.index(p_card[1]):
+            user.hand.add(table_cards)
+        else:
+            computer_player.hand.add(table_cards)
+
+
+
+
+
+
 
 
 
